@@ -1,0 +1,25 @@
+@model IEnumerable<SimpleCRUD.Models.Employee>
+
+<h2>Employees:</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Employment Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.FirstName @employee.LastName</td>
+                <td>@employee.Email</td>
+                <td>@employee.PhoneNumber</td>
+                <td>@employee.EmploymentType</td>
+            </tr>
+        }
+    </tbody>
+</table>
