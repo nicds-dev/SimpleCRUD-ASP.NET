@@ -2,6 +2,10 @@
 **/obj
 *.log
 *.db
+*.sln
 appsettings.json
 appsettings.Development.json
 .vs/
+
+# Ignore local development settings in Properties
+Properties/launchSettings.json
