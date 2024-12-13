@@ -25,5 +25,5 @@ public class Employee
     public required string PhoneNumber { get; set; }
 
     public int CategoryId { get; set; }
-    public required Category Category { get; set; }
+    public required Category? Category { get; set; }
 }
