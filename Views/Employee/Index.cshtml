@@ -1,6 +1,7 @@
 @model IEnumerable<SimpleCRUD.Models.Employee>
 
-<h2>Employees:</h2>
+<h1 class="text-2xl fw-bold mb-4">Employee Management</h1>
+
 
 <div class="row rounded shadow p-3">
     <table class="table">
@@ -11,7 +12,7 @@
                 <th>Email</th>
                 <th>Phone Number</th>
                 <th>Category</th>
-                <th>Description</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,8 +23,14 @@
                     <td>@employee.LastName</td>
                     <td>@employee.Email</td>
                     <td>@employee.PhoneNumber</td>
-                    <td>@employee.Category.Name</td>
-                    <td>@employee.Category.Description</td>
+                    <td>@employee.Category?.Name</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a asp-action="Update" asp-route-id="@employee.Id" class="btn btn-outline-primary btn-sm">Update</a>
+                            <a asp-action="Detail" asp-route-id="@employee.Id" class="btn btn-outline-info btn-sm">View</a>
+                            <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-outline-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>

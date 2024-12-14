@@ -15,5 +15,5 @@ public class Category
     [StringLength(150, ErrorMessage = "First Name cannot exceed 150 characters.")]
     public required string Description { get; set; }
 
-    public List<Employee> Employees { get; set; }
+    public List<Employee>? Employees { get; set; }
 }

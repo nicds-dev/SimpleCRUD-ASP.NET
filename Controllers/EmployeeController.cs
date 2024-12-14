@@ -17,12 +17,13 @@ public class EmployeeController : Controller
     public IActionResult Index()
     {
         var employees = _context.Employees
-            .Include(c => c.Category)
+            .Include(e => e.Category)
             .ToList();
 
         return View(employees);
     }
 
+    // Create
     [HttpGet]
     public async Task<IActionResult> Create()
     {
@@ -30,7 +31,6 @@ public class EmployeeController : Controller
 
         return View();
     }
-
     [HttpPost]
     public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,PhoneNumber,CategoryId")] Employee employee)
     {
@@ -43,5 +43,83 @@ public class EmployeeController : Controller
         ViewBag.Categories = await _context.Categories.ToListAsync();
 
         return View();
+    }
+
+    // Read
+    [HttpGet]
+    public async Task<IActionResult> Detail(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var employee = await _context.Employees
+            .Include(e => e.Category)
+            .FirstOrDefaultAsync(e => e.Id == id);
+        if (employee == null)
+        {
+            return NotFound();
+        }
+
+        return View(employee);
+    }
+
+    // Update
+    [HttpGet]
+    public async Task<IActionResult> Update(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var employee = await _context.Employees.FindAsync(id);
+        if (employee == null)
+        {
+            return NotFound();
+        }
+        ViewBag.Categories = await _context.Categories.ToListAsync();
+
+        return View(employee);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Update(int id, [Bind("Id,FirstName,LastName,Email,PhoneNumber,CategoryId")] Employee employee)
+    {
+        if (id != employee.Id)
+        {
+            return BadRequest();
+        }
+
+        if (ModelState.IsValid)
+        {
+            _context.Update(employee);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        ViewBag.Categories = await _context.Categories.ToListAsync();
+
+        return View(employee);
+    }
+
+    // Delete
+    [HttpGet]
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var employee = await _context.Employees.FindAsync(id);
+        if (employee == null)
+        {
+            return NotFound();
+        }
+
+        _context.Employees.Remove(employee);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
     }
 }
