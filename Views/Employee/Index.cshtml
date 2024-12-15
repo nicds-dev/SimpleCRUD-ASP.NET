@@ -1,8 +1,17 @@
-@model IEnumerable<SimpleCRUD.Models.Employee>
+@model SimpleCRUD.ViewModels.EmployeeViewModel
 
-<h1 class="text-2xl fw-bold mb-4">Employee Management</h1>
+<h1 class="fs-3 fw-bold my-4">Employee Management</h1>
 
-
+<div class="d-flex justify-content-between my-4">
+    <form asp-action="Index" asp-controller="Employee" method="get">
+        <input type="text" asp-for="SearchText" placeholder="Search Employee..." class="form-control" />
+        <!-- <i class="bi bi-search"></i> -->
+    </form>
+    <button class="btn btn-dark">
+        <i class="bi bi-plus-lg me-2"></i>
+        Add New Employee
+    </button>
+</div>
 <div class="row rounded shadow p-3">
     <table class="table">
         <thead>
@@ -16,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var employee in Model)
+            @foreach (var employee in Model.Employees)
             {
                 <tr>
                     <td>@employee.FirstName</td>

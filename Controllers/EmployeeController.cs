@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SimpleCRUD.Data;
 using SimpleCRUD.Models;
+using SimpleCRUD.ViewModels;
 
 namespace SimpleCRUD.Controllers;
 
@@ -14,13 +15,23 @@ public class EmployeeController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(string SearchText)
     {
         var employees = _context.Employees
             .Include(e => e.Category)
             .ToList();
+        if (!string.IsNullOrEmpty(SearchText))
+        {
+            employees = employees
+                .Where(e => e.FirstName.ToLower().Contains(SearchText.ToLower()) ||
+                            e.LastName.ToLower().Contains(SearchText.ToLower()))
+            .ToList();
+        }
+        var employeeViewModel = new EmployeeViewModel();
+        employeeViewModel.Employees = employees;
+        employeeViewModel.SearchText = SearchText;
 
-        return View(employees);
+        return View(employeeViewModel);
     }
 
     // Create
