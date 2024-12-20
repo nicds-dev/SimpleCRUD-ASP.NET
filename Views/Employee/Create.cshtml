@@ -1,8 +1,8 @@
 @model SimpleCRUD.Models.Employee
 
-<h3 class="text-center my-5">Add Employee</h3>
-<div class="row justify-content-center">
-    <form asp-action="Create" method="post" class="col-md-6">
+<h3 class="fs-3 fw-bold text-center my-5">Add New Employee</h3>
+<div class="border rounded p-4 col-md-6 mx-auto">
+    <form asp-action="Create" method="post">
         <div class="form-group">
             <label asp-for="FirstName" class="form-label">First name</label>
             <input asp-for="FirstName" class="form-control">
@@ -34,9 +34,9 @@
             </select>
             <div asp-validation-for="CategoryId" class="form-text"></div>
         </div>
-        <div class="form-group mt-3">
-            <input type="submit" value="Save" class="btn btn-primary">
-            <a asp-action="Index" class="btn btn-danger">Cancel</a>
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+            <input type="submit" value="Add Employee" class="btn btn-dark">
         </div>
     </form>
 </div>
