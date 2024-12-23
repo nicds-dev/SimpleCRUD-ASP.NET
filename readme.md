@@ -18,8 +18,22 @@ dotnet run
 
 ## VIEWS
 
-![Home](images/home.png)
-![Detail](images/detail.png)
-![ADD/UPDATE](images/add-update.png)
-![SUCCESS-MSG](images/success.png)
-![DELETE](images/delete.png)
+Home:
+
+![Home](Images/home.png)
+
+Detail:
+
+![Detail](Images/detail.png)
+
+Add/Update:
+
+![ADD/UPDATE](Images/add-update.png)
+
+Success message:
+
+![SUCCESS-MSG](Images/success.png)
+
+Delete modal:
+
+![DELETE](Images/delete.png)
